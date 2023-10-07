@@ -1,0 +1,79 @@
+{# templates/components/datatable.html.twig #}
+{% if condition %}
+    {% set columns = this.normalizedColumns %}
+    <div
+            {{ this.stimulusController ? stimulus_controller(this.stimulusController, {
+                useDatatables: this.useDatatables,
+                search: this.search,
+                scrollY: this.scrollY,
+                dom: this.dom,
+                searchPanesColumns: this.searchPanesColumns,
+                info: this.info,
+            }) }}>
+        {# <table class="table"> #}
+        <table {{ this.tableId ? 'id="%s"'|format(this.tableId)|raw }}
+                class="table table table-striped responsivexx {{ this.tableClasses }}"
+                {{ this.stimulusController ? stimulus_target(this.stimulusController, 'table') }}>
+            <thead>
+            <tr>
+                {% for c in columns %}
+                    <th class="
+                        {{ c.inSearchPane ? 'in-search-pane' }}
+                        "
+                    >
+                        {{ this.trans ? c.title|trans : c.title }}
+                    </th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in data %}
+                <tr class="align-top">
+                    {% for c in columns %}
+                    <td>
+
+                        {#                {% if c.templateName and block(c.templateName) is defined %} #}
+                        {#                {% endif %} #}
+
+                        {# use a different template than the name.  We need common templates. #}
+                        {% set templateName = c.twigTemplate|default(c.name) %}
+
+                        {% if block(templateName) is defined %}
+                            {% with {field_name: c.name, row: row, column: c, c:c } %}
+                                {{ block(templateName) }}
+                            {% endwith %}
+                        {% else %}
+                            {% if c.twigTemplate %}
+                                <span class="text-danger">{{ templateName }} is not defined.</span>
+                            {% endif %}
+                            {% set label = attribute(row, c.name)|default() %}
+                            {% if label is iterable %}
+                                {% set label = label|length %}
+                            {% endif %}
+                            {% if c.translateValue %}
+                                {% set label = c.domain ? label|trans(domain=c.domain) : label|trans %}
+                            {% endif %}
+                            {% if c.route %}
+                                <a href="{{ path(c.route, row.rp) }}">
+                                    {{ label }}
+                                </a>
+                            {% else %}
+                                {{ label }}
+                            {% endif %}
+                        {% endif %}
+                        {#                    {% set _block = block(c)|default(false) %} #}
+                        {#                    {% if _block is not empty %} #}
+                        {#                        {{ _block|raw }} #}
+                        {#                    {% else %} #}
+                        {#                        {{ attribute(row, c) }} #}
+                        {#                    {% endif %} #}
+
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+{% endif %}

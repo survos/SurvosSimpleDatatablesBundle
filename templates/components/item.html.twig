@@ -1,0 +1,24 @@
+{# templates/components/datatable.html.twig #}
+{% set columns = this.normalizedColumns %}
+<div {{ this.stimulusController ? stimulus_controller(this.stimulusController) }}>
+    <div class="m-4">
+        <dl class="row">
+            {% for c in columns %}
+                <dt class="col-sm-3">
+                    {{ c.title }}
+                </dt>
+                <dd class="col-md-9">
+                    {% if block(c.name) is defined %}
+                        {% with {data: data} %}
+                            {{ block(c.name) }}
+                        {% endwith %}
+                    {% else %}
+                        {# handle bools #}
+                        {{ attribute(data, c.name)|default() }}
+                    {% endif %}
+                </dd>
+            {% endfor %}
+
+        </dl>
+    </div>
+</div>

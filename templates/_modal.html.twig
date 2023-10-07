@@ -1,0 +1,56 @@
+{# {% set modalController = modalController|default('modal-form') %} #}
+
+<div id="modal_controller"
+        {{ stimulus_target(aaController, 'mc') }}
+        {{ stimulus_controller(modalController, {
+        }) }}>
+
+    {% if showButton|default(false) %}
+        <button {{ stimulus_action(modalController, 'openModal') }}
+                class="btn btn-primary btn-sm"
+        >{{ buttonLabel|default('open modal') }}
+        </button>
+    {% endif %}
+
+
+    <div {{ stimulus_target(modalController, 'modal') }}  {{ stimulus_target(aaController, 'modal')  }}
+            class="modal fade"
+            tabindex="-1"
+            aria-hidden="true"
+    >
+        <div class="modal-dialog {{ modalClass|default('') }}">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ modalTitle|default('modal title??') }}</h5>
+                    <button type="button" class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                    </button>
+                </div>
+
+                <div class="modal-body" {{ stimulus_target(modalController, 'modalBody')  }}  {{ stimulus_target(aaController, 'modalBody') }} >
+                    {{ modalContent|default('Loading...') }}
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Cancel
+                    </button>
+
+                    Open <span class="fas fa-external-link-alt"></span>
+                    {#                        <span {{ stimulus_target(modalController, 'openUrl') }}>URL TO OPEN</span>#}
+                    <a target="_blank" class="btn btn-primary" href="#" {{ stimulus_target(modalController, 'openUrl') }}>URL TO OPEN</a>
+                    <button {{ stimulus_action(modalController, 'open')}} type="button" class="btn btn-secondary" >
+                    </button>
+
+                    <button type="button" class="btn btn-primary" {{ stimulus_action(modalController, 'submitForm') }}>
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

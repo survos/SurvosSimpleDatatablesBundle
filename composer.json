@@ -1,0 +1,55 @@
+{
+    "name": "survos/simple-datatables-bundle",
+    "description": "incorporate simple datatables, using twig and stimulus",
+    "keywords": [
+        "symfony-ux",
+        "symfony6"
+    ],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tac Tacelosky",
+            "email": "tacman@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "symfony/config": "^6.1.0",
+        "symfony/dependency-injection": "^6.1.0",
+        "symfony/http-kernel": "^6.1.0",
+        "symfony/options-resolver": "^6.1.0",
+        "symfony/ux-twig-component": "^2.9",
+        "twig/twig": "^3.4",
+        "symfony/stimulus-bundle": "^2.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "Survos\\SimpleDatatables\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.6-dev"
+        },
+        "symfony": {
+            "require": "^6.1.0"
+        }
+    },
+    "scripts": {
+        "phpstan": "vendor/bin/phpstan analyse"
+    },
+    "suggest": {
+        "monolog/monolog": "Allows more advanced logging of the application flow"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "phpstan/phpstan": "^1.8",
+        "symfony/browser-kit": "^6.1.0",
+        "symfony/framework-bundle": "^6.1.0",
+        "symfony/phpunit-bridge": "^6.1.0",
+        "symfony/twig-bundle": "^6.1.0",
+        "symfony/var-dumper": "^6.1.0"
+    },
+    "prefer-stable": true
+}
