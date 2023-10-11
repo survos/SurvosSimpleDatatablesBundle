@@ -6,7 +6,8 @@ export default class extends Controller {
     static targets = ['table', 'modal', 'modalBody', 'fieldSearch', 'message'];
     static values = {
         search: true,
-        info: false,
+        fixedHeight: false,
+        perPage: 12,
         filter: {type: String, default: ''}
     }
 
@@ -18,8 +19,9 @@ export default class extends Controller {
         // super.connect();
         console.error('hello from ' + this.identifier);
         const dataTable = new DataTable(this.element, {
-            searchable: true,
-            fixedHeight: true,
+            searchable: this.searchValue,
+            fixedHeight: this.fixedHeightValue,
+            perPage: this.perPageValue,
         });
         this.initialized = true;
     }

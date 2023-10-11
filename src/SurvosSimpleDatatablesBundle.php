@@ -52,10 +52,10 @@ class SurvosSimpleDatatablesBundle extends AbstractBundle
         // since the configuration is short, we can add it here
         $definition->rootNode()
             ->children()
-            ->scalarNode('stimulus_controller')->defaultValue('@survos/grid-bundle/grid')->end()
-            ->scalarNode('widthFactor')->defaultValue(2)->end()
-            ->scalarNode('height')->defaultValue(30)->end()
-            ->scalarNode('foregroundColor')->defaultValue('green')->end()
+            ->scalarNode('stimulus_controller')->defaultValue('@survos/simple-datatables-bundle/table')->end()
+            ->booleanNode('per_page')->defaultValue(10)->end()
+            ->booleanNode('searchable')->defaultValue(true)->end()
+            ->scalarNode('fixed_height')->defaultValue(true)->end()
             ->end();
 
         ;
@@ -67,8 +67,7 @@ class SurvosSimpleDatatablesBundle extends AbstractBundle
             return;
         }
 
-        $dir =            realpath(__DIR__.'/../assets/src/controllers');
-//        dump($dir, 'vendor/survos/simple-datatables-bundle/assets/src/controllers/sdt_controller.js');
+        $dir = realpath(__DIR__.'/../assets/src/controllers');
         assert(file_exists($dir), $dir);
 
         $builder->prependExtensionConfig('framework', [
@@ -78,10 +77,6 @@ class SurvosSimpleDatatablesBundle extends AbstractBundle
                 ],
             ],
         ]);
-
-
-//                dd($builder->getCompilerPassConfig());
-        //        assert($configs[0]['defaults']['pagination_client_items_per_page'], "pagination_client_items_per_page must be tree in config/api_platform");
 
         // https://stackoverflow.com/questions/72507212/symfony-6-1-get-another-bundle-configuration-data/72664468#72664468
         //        // iterate in reverse to preserve the original order after prepending the config
