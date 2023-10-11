@@ -17,6 +17,9 @@ To change any html table into a datatable, simple add the stimulus controller to
 
 ## Complete Project
 
+Cut and paste to create an new Symfony project with a dynamic, searchable datatable, without writing a single line of Javascript!  No webpack or build step either.
+
+```bash
 symfony new simple-datatables-demo --webapp && cd simple-datatables-demo
 composer req symfony/asset-mapper
 composer req symfony/stimulus-bundle:2.x-dev
@@ -49,5 +52,7 @@ cat > templates/app/index.html.twig <<END
 {% endblock %}
 END
 symfony server:start -d
+```
+
 
 
