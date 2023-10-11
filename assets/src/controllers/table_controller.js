@@ -3,7 +3,7 @@ import {DataTable} from "simple-datatables"
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
-    static targets = ['table', 'modal', 'modalBody', 'fieldSearch', 'message'];
+    static targets = ['table', 'tr'];
     static values = {
         search: true,
         fixedHeight: false,
@@ -14,6 +14,15 @@ export default class extends Controller {
     initalize() {
         this.initialized = false;
     }
+
+    trTargetConnected(element) {
+        console.log(element);
+
+        // let countryCode = element.innerText;
+        let countryCode = element.dataset.cc;
+        element.innerHTML = 'xx';
+    }
+
 
     connect() {
         // super.connect();
