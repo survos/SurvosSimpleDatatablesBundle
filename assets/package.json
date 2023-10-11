@@ -1,12 +1,12 @@
 {
-  "name": "@survos/simple-datatables-bundle",
+  "name": "@survos/simple-datatables",
   "description": "integrate php and javascript helpers for Simple Datatables",
   "license": "MIT",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "symfony": {
     "controllers": {
-      "sdt": {
-        "main": "src/controllers/sdt_controller.js",
+      "table": {
+        "main": "src/controllers/table_controller.js",
         "webpackMode": "eager",
         "fetch": "lazy",
         "enabled": true

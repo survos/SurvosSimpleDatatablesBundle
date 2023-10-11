@@ -1,5 +1,4 @@
 import {Controller} from "@hotwired/stimulus";
-
 import {DataTable} from "simple-datatables"
 
 /* stimulusFetch: 'lazy' */
@@ -18,9 +17,8 @@ export default class extends Controller {
     connect() {
         // super.connect();
         console.error('hello from ' + this.identifier);
-        const myTable = document.querySelector(this.element);
-        const dataTable = new DataTable(myTable, {
-            searchable: false,
+        const dataTable = new DataTable(this.element, {
+            searchable: true,
             fixedHeight: true,
         });
         this.initialized = true;
