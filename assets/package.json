@@ -9,19 +9,20 @@
         "main": "src/controllers/table_controller.js",
         "webpackMode": "eager",
         "fetch": "lazy",
-        "enabled": true
+        "enabled": true,
+        "autoimport": {
+          "@survos/simple-datatables/style.css": true
+        }
+
       }
     },
     "importmap": {
-      "@hotwired/stimulus": "^3.0.0",
+      "@hotwired/stimulus": "^3.1.0",
       "simple-datatables": "^8.0.0"
     }
   },
   "peerDependencies": {
     "@hotwired/stimulus": "^3.1.0",
     "simple-datatables": "^8.0.0"
-  },
-  "devDependencies": {
-    "@hotwired/stimulus": "^3.1.0"
   }
 }

@@ -25,10 +25,9 @@ composer req symfony/asset-mapper
 composer req symfony/stimulus-bundle:2.x-dev
 composer req survos/simple-datatables-bundle
 bin/console importmap:require bootstrap
-bin/console make:controller AppController
-sed -i "s|Route('/app'|Route('/'|" src/Controller/AppController.php
+bin/console make:controller Simple -i
 
-cat > templates/app/index.html.twig <<END
+cat > templates/simple.html.twig <<END
 {% extends 'base.html.twig' %}
 
 {% block body %}
@@ -52,7 +51,25 @@ cat > templates/app/index.html.twig <<END
 {% endblock %}
 END
 symfony server:start -d
+symfony open:local --path=/simple
 ```
 
 
 
+## Problem in package.json
+
+```json
+  "symfony": {
+    "controllers": {
+      "table": {
+        "main": "src/controllers/table_controller.js",
+        "webpackMode": "eager",
+        "fetch": "lazy",
+        "enabled": true,
+        "autoimport": {
+          "@survos/simple-datatables/style.css": true <-- what is this supposed to be?
+        }
+      }
+    },
+
+```

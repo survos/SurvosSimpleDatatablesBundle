@@ -67,12 +67,13 @@ class SurvosSimpleDatatablesBundle extends AbstractBundle
             return;
         }
 
-        $dir = realpath(__DIR__.'/../assets/src/controllers');
+        $dir = realpath(__DIR__.'/../assets/');
         assert(file_exists($dir), $dir);
 
         $builder->prependExtensionConfig('framework', [
             'asset_mapper' => [
                 'paths' => [
+//                    __DIR__.'/../../assets/' => '@survos/simple-datatables',
                     $dir => '@survos/simple-datatables',
                 ],
             ],
