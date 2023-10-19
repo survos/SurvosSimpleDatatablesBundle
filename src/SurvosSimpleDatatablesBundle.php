@@ -2,6 +2,7 @@
 
 namespace Survos\SimpleDatatables;
 
+use Survos\CoreBundle\Traits\HasAssetMapperTrait;
 use Survos\SimpleDatatables\Components\GridComponent;
 use Survos\SimpleDatatables\Components\ItemGridComponent;
 use Survos\SimpleDatatables\Twig\TwigExtension;
@@ -17,6 +18,7 @@ use Twig\Environment;
 
 class SurvosSimpleDatatablesBundle extends AbstractBundle
 {
+    use HasAssetMapperTrait;
     // $config is the bundle Configuration that you usually process in ExtensionInterface::load() but already merged and processed
     /**
      * @param array<mixed> $config
@@ -73,37 +75,10 @@ class SurvosSimpleDatatablesBundle extends AbstractBundle
         $builder->prependExtensionConfig('framework', [
             'asset_mapper' => [
                 'paths' => [
-//                    __DIR__.'/../../assets/' => '@survos/simple-datatables',
                     $dir => '@survos/simple-datatables',
                 ],
             ],
         ]);
-
-        // https://stackoverflow.com/questions/72507212/symfony-6-1-get-another-bundle-configuration-data/72664468#72664468
-        //        // iterate in reverse to preserve the original order after prepending the config
-        //        foreach (array_reverse($configs) as $config) {
-        //            $container->prependExtensionConfig('my_maker', [
-        //                'root_namespace' => $config['root_namespace'],
-        //            ]);
-        //        }
     }
 
-    private function isAssetMapperAvailable(ContainerBuilder $container): bool
-    {
-        if (!interface_exists(AssetMapperInterface::class)) {
-            assert(false, 'for now, add the asset mapper component');
-            return false;
-        }
-
-        // check that FrameworkBundle 6.3 or higher is installed
-        $bundlesMetadata = $container->getParameter('kernel.bundles_metadata');
-        if (!isset($bundlesMetadata['FrameworkBundle'])) {
-            assert(false, 'symfony framework 6.3+ required.');
-            return false;
-        }
-
-        $file = $bundlesMetadata['FrameworkBundle']['path'].'/Resources/config/asset_mapper.php';
-        assert(is_file($file), $file);
-        return is_file($file);
-    }
 }

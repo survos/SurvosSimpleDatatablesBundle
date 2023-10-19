@@ -15,6 +15,7 @@ export default class extends Controller {
         this.initialized = false;
     }
 
+    // this is never called, because data and class attributes in simple-datatables are removed during rendering.
     trTargetConnected(element) {
         console.log(element);
 
@@ -26,7 +27,7 @@ export default class extends Controller {
 
     connect() {
         // super.connect();
-        console.error('hello from ' + this.identifier);
+        console.log('hello from ' + this.identifier);
         const dataTable = new DataTable(this.element, {
             searchable: this.searchValue,
             fixedHeight: this.fixedHeightValue,
