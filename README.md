@@ -15,6 +15,24 @@ To change any html table into a datatable, simple add the stimulus controller to
      <table class="table" {{ stimulus_controller('@survos/simple-datatables-bundle/table', {perPage: 5, sortable: true}) }}>
 ```
 
+# BUG
+```bash
+symfony new assetmapper-bug  --webapp --version=next --php=8.2 && cd assetmapper-bug
+composer config extra.symfony.allow-contrib true
+composer req symfony/asset-mapper:^6.4
+bin/console importmap:require datatables.net-bs5
+
+bin/console importmap:require @tabler/core
+bin/console importmap:require @hotwired/stimulus
+
+
+
+composer config minimum-stability dev
+composer config extra.symfony.allow-contrib true
+composer req symfony/asset-mapper:^6.4
+composer req symfony/stimulus-bundle:2.x-dev
+
+```
 ## Complete Project
 
 Cut and paste to create an new Symfony project with a dynamic, searchable datatable, without writing a single line of Javascript!  No webpack or build step either.
@@ -25,6 +43,7 @@ composer config minimum-stability dev
 composer config extra.symfony.allow-contrib true
 composer req symfony/asset-mapper:^6.4
 composer req symfony/stimulus-bundle:2.x-dev
+
 composer req survos/simple-datatables-bundle
 bin/console make:controller Simple -i
 cat > templates/simple.html.twig <<END
