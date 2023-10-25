@@ -17,21 +17,30 @@ To change any html table into a datatable, simple add the stimulus controller to
 
 # BUG
 ```bash
-symfony new assetmapper-bug  --webapp --version=next --php=8.2 && cd assetmapper-bug
+symfony new bug  --webapp --version=next --php=8.2 && cd bug
 composer config extra.symfony.allow-contrib true
 composer req symfony/asset-mapper:^6.4
-bin/console importmap:require datatables.net-bs5
+bin/console importmap:require twig
+bin/console make:controller Bug -i
+cat > templates/bug.html.twig <<END
+{% extends 'base.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="module">
+        import Twig from 'twig';
+{% verbatim %}
+        var template = Twig.twig({
+            data: 'Hello, {{ name }}.'
+        });
+        document.getElementById("#hello").innerHTML = template.render({name: 'Tac'});
+{% endverbatim %}
+    </script>
+{% endblock %}
+{% block body %}<div id="hello">hello</div>{% endblock %}
 
-bin/console importmap:require @tabler/core
-bin/console importmap:require @hotwired/stimulus
-
-
-
-composer config minimum-stability dev
-composer config extra.symfony.allow-contrib true
-composer req symfony/asset-mapper:^6.4
-composer req symfony/stimulus-bundle:2.x-dev
-
+END
+symfony server:start -d
+symfony open:local --path=/bug
 ```
 ## Complete Project
 
