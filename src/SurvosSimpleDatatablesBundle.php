@@ -3,7 +3,7 @@
 namespace Survos\SimpleDatatables;
 
 use Survos\CoreBundle\Traits\HasAssetMapperTrait;
-use Survos\SimpleDatatables\Components\GridComponent;
+use Survos\SimpleDatatables\Components\SimpleDatatablesComponent;
 use Survos\SimpleDatatables\Components\ItemGridComponent;
 use Survos\SimpleDatatables\Twig\TwigExtension;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
@@ -34,7 +34,7 @@ class SurvosSimpleDatatablesBundle extends AbstractBundle
             ;
         }
 
-        $builder->register(GridComponent::class)
+        $builder->register(SimpleDatatablesComponent::class)
             ->setAutowired(true)
             ->setAutoconfigured(true)
             ->setArgument('$twig', new Reference('twig'))

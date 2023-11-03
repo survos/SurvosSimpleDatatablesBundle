@@ -18,12 +18,6 @@ export default class extends Controller {
     connect() {
         // super.connect();
         console.error('hello from ' + this.identifier);
-        const myTable = document.querySelector(this.element);
-        const dataTable = new DataTable(myTable, {
-            searchable: false,
-            fixedHeight: true,
-        });
-        this.initialized = true;
     }
 
     disconnect() {

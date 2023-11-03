@@ -9,8 +9,8 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 use Twig\Environment;
 
-#[AsTwigComponent('grid', template: '@SurvosSimpleDatatables/components/grid.html.twig')]
-class GridComponent
+#[AsTwigComponent('simple_datatables', template: '@SurvosSimpleDatatables/components/grid.html.twig')]
+class SimpleDatatablesComponent
 {
     public function __construct(
         private Environment $twig,
@@ -26,6 +26,7 @@ class GridComponent
     public bool $trans = true;
     public string|bool|null $domain = null;
 
+    public int $perPage=5;
 
     public bool $useDatatables = true;
     public bool $info = false;
@@ -42,33 +43,16 @@ class GridComponent
         $resolver = new OptionsResolver();
         $resolver->setDefaults([
             'data' => null,
-            'class' => null,
-            'dom' => 'Plfrtip',
-            'useDatatables' => true,
-
+            'perPage' => 10,
+            'activate' => true,
             'tableId' => null,
-            'tableClasses' => '',
-            'scrollY' => '50vh',
-//            'stimulusController' => '@survos/grid-bundle/grid',
+            'stimulusController' => '@survos/simple-datatables-bundle/table',
             'search' => true,
-            'info' => false,
             'condition' => true,
-            'trans' => false,
-            'domain' => null,
             'caller' => null,
             'columns' => [],
         ]);
         $parameters = $resolver->resolve($parameters);
-        if (is_null($parameters['data'])) {
-            $class = $parameters['class'];
-            assert($class, "Must pass class or data");
-
-            // @todo: something clever to limit memory, use yield?
-//            $parameters['data'] = $this->registry->getRepository($class)->findAll();
-        }
-        //        $resolver->setAllowedValues('type', ['success', 'danger']);
-        //        $resolver->setRequired('message');
-        //        $resolver->setAllowedTypes('message', 'string');
         return $parameters;
     }
 
@@ -96,17 +80,4 @@ class GridComponent
         return $normalizedColumns;
     }
 
-    public function searchPanesColumns(): int
-    {
-        $count = 0;
-        // count the number, if > 6 we could figured out the best layout
-        foreach ($this->normalizedColumns() as $column) {
-//            dd($column);
-            if ($column->inSearchPane) {
-                $count++;
-            }
-        }
-        $count = min($count, 6);
-        return $count;
-    }
 }

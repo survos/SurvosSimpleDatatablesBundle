@@ -7,7 +7,7 @@ export default class extends Controller {
     static values = {
         search: true,
         fixedHeight: false,
-        perPage: 12,
+        perPage: 10,
         filter: {type: String, default: ''}
     }
 
@@ -28,6 +28,7 @@ export default class extends Controller {
     connect() {
         // super.connect();
         console.log('hello from ' + this.identifier);
+        console.assert((this.perPageValue % 5) === 0, "per page must be divisible by 5");
         const dataTable = new DataTable(this.element, {
             searchable: this.searchValue,
             fixedHeight: this.fixedHeightValue,
