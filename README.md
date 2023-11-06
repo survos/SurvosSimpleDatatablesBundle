@@ -48,11 +48,9 @@ Cut and paste to create an new Symfony project with a dynamic, searchable datata
 
 ```bash
 symfony new simple-datatables-demo --webapp --version=next --php=8.2 && cd simple-datatables-demo
-composer config minimum-stability dev
+rm .git -rf
 composer config extra.symfony.allow-contrib true
 composer req symfony/asset-mapper:^6.4
-composer req symfony/stimulus-bundle:2.x-dev
-composer req symfony/ux-chartjs
 
 composer req survos/simple-datatables-bundle
 bin/console make:controller Simple -i
