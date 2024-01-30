@@ -9,7 +9,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('item_grid', template: '@SurvosSimpleDatatables/components/item.html.twig')]
+#[AsTwigComponent('simple_item_grid', template: '@SurvosSimpleDatatables/components/item.html.twig')]
 class ItemGridComponent
 {
     public function __construct()
