@@ -21,10 +21,9 @@ To change any html table into a datatable, simple add the stimulus controller to
 Cut and paste to create an new Symfony project with a dynamic, searchable datatable, without writing a single line of Javascript!  No webpack or build step either.
 
 ```bash
-symfony new simple-datatables-demo --webapp --version=next --php=8.2 && cd simple-datatables-demo
+symfony new simple-datatables-demo --webapp  && cd simple-datatables-demo
 rm .git -rf
 composer config extra.symfony.allow-contrib true
-composer req symfony/asset-mapper:^6.4 symfony/stimulus-bundle:^2.x-dev
 composer req survos/simple-datatables-bundle survos/bootstrap-bundle
 echo "import 'bootstrap/dist/css/bootstrap.min.css'" >> assets/app.js
 
@@ -55,3 +54,43 @@ END
 symfony server:start -d
 symfony open:local --path=/simple
 ```
+
+Or even easier, use the twig component. To simplify the example we're going to add the fetch and json_decode functions to twig, normally that would be done in the controller, but the cut and paste is faster this way.
+
+```bash
+composer require zenstruck/twig-service-bundle
+cat > config/packages/zenstruck_twig_service.yaml <<END
+zenstruck_twig_service:
+  functions:
+    fetch: file_get_contents # available as "fn_fetch()" in twig
+    json_decode: json_decode
+END
+
+cat > templates/simple.html.twig <<'END'
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% set columns = [
+        {name: 'id'},
+        {name: 'title', title: 'name'},
+        'brand',
+        'price'
+    ] %}
+    <twig:simple_datatables
+            perPage="20"
+            :caller="_self"
+            :columns="columns"
+            :data="fn_json_decode(fn_fetch('https://dummyjson.com/products')).products"
+    >
+        <twig:block name="price">
+            ${{ row.price|number_format(2) }}
+        </twig:block>
+
+    </twig:simple_datatables>
+{% endblock %}
+END
+symfony server:start -d
+symfony open:local --path=/simple
+    
+```
+
