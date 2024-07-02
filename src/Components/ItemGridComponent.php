@@ -19,6 +19,7 @@ class ItemGridComponent
     public $data = null;
 
     public array $columns;
+    public array|string $exclude;
 
     public ?string $stimulusController = '@survos/grid-bundle/item_grid';
 
@@ -30,13 +31,20 @@ class ItemGridComponent
             'data' => null,
             'class' => null,
             'caller' => null,
+            'exclude' => [],
             'columns' => [],
         ]);
         $parameters = $resolver->resolve($parameters);
         $data = $parameters['data'];
+        $exclude = $parameters['exclude'];
         if (count($parameters['columns']) === 0) {
             if (is_array($data)) {
-                $parameters['columns'] = array_keys($data);
+                if (is_string($exclude)) {
+                    $exclude = explode(',', $exclude);
+                }
+                $columns = array_keys($data);
+                $columns = array_diff($columns, $exclude);
+                $parameters['columns'] = $columns;
             }
         }
         return $parameters;

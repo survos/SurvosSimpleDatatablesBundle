@@ -8,33 +8,46 @@ export default class extends Controller {
         search: true,
         fixedHeight: false,
         perPage: 10,
-        filter: {type: String, default: ''}
+        filter: {type: String, default: ''},
+        remoteUrl: {type: String, default: ''}
     }
 
     initalize() {
         this.initialized = false;
     }
 
-    // this is never called, because data and class attributes in simple-datatables are removed during rendering.
-    trTargetConnected(element) {
-        console.log(element);
-
-        // let countryCode = element.innerText;
-        let countryCode = element.dataset.cc;
-        element.innerHTML = 'xx';
-    }
-
-
     connect() {
         // super.connect();
-        console.log('hello from ' + this.identifier);
         console.assert((this.perPageValue % 5) === 0, "per page must be divisible by 5");
-        const dataTable = new DataTable(this.element, {
-            searchable: this.searchValue,
-            fixedHeight: this.fixedHeightValue,
-            perPage: this.perPageValue,
-        });
+
+        if (!this.initialized) {
+
+            if (this.remoteUrlValue) {
+                fetch(this.remoteUrlValue)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data || !data.length) {
+                            return
+                        }
+                        const dataTable = new DataTable(this.element, {
+                            data: {
+                                headings: Object.keys(data[0]),
+                                data: data.map(item => Object.values(item))
+                            }
+                        })
+                    })
+            } else {
+                const dataTable = new DataTable(this.element, {
+                    searchable: this.searchValue,
+                    fixedHeight: this.fixedHeightValue,
+                    perPage: this.perPageValue,
+                });
+            }
+        }
+
         this.initialized = true;
+
+
     }
 
     disconnect() {

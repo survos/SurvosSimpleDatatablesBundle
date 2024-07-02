@@ -36,6 +36,7 @@ class SimpleDatatablesComponent
     public array $searchPanesFields=[];
     public ?string $tableId = null;
     public string $tableClasses = '';
+    public ?string $remoteUrl=null;
 
     #[PreMount]
     public function preMount(array $parameters = []): array
@@ -46,6 +47,7 @@ class SimpleDatatablesComponent
             'perPage' => 10,
             'activate' => true,
             'tableId' => null,
+            'remoteUrl' => null,
             'stimulusController' => '@survos/simple-datatables-bundle/table',
             'search' => true,
             'condition' => true,

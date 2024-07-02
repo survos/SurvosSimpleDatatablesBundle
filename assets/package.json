@@ -18,11 +18,11 @@
     },
     "importmap": {
       "@hotwired/stimulus": "^3.1.0",
-      "simple-datatables": "^9.0.0"
+      "simple-datatables": "^9.0.4"
     }
   },
   "peerDependencies": {
     "@hotwired/stimulus": "^3.1.0",
-    "simple-datatables": "^9.0.0"
+    "simple-datatables": "^9.0.4"
   }
 }

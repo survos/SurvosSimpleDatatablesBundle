@@ -1,19 +1,36 @@
 {# templates/components/datatable.html.twig #}
-{% if condition %}
+{% if remoteUrl %}
+    {{ remoteUrl }}
+<table {{ this.tableId ? 'id="%s"'|format(this.tableId)|raw }}
+
+        {{ this.stimulusController ? stimulus_controller(this.stimulusController, {
+            useDatatables: this.useDatatables,
+            search: this.search,
+            perPage: this.perPage,
+            scrollY: this.scrollY,
+            data: [],
+            remoteUrl: this.remoteUrl,
+        }) }}
+        class="table table table-striped responsivexx {{ this.tableClasses }}"
+        {{ this.stimulusController ? stimulus_target(this.stimulusController, 'table') }}>
+</table>
+
+{% elseif condition %}
     {% set columns = this.normalizedColumns %}
         {# <table class="table"> #}
         <table {{ this.tableId ? 'id="%s"'|format(this.tableId)|raw }}
+                class="table table table-striped responsivexx {{ this.tableClasses }}"
 
                 {{ this.stimulusController ? stimulus_controller(this.stimulusController, {
                     useDatatables: this.useDatatables,
                     search: this.search,
                     perPage: this.perPage,
                     scrollY: this.scrollY,
+                    remoteUrl: this.remoteUrl,
                     dom: this.dom,
                     info: this.info,
                 }) }}
-
-                class="table table table-striped responsivexx {{ this.tableClasses }}"
+                {# the target! #}
                 {{ this.stimulusController ? stimulus_target(this.stimulusController, 'table') }}>
             <thead>
             <tr>

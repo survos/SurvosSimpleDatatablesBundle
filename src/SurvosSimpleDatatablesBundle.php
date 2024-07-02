@@ -19,7 +19,7 @@ use Twig\Environment;
 class SurvosSimpleDatatablesBundle extends AbstractBundle
 {
     use HasAssetMapperTrait;
-    // $config is the bundle Configuration that you usually process in ExtensionInterface::load() but already merged and processed
+
     /**
      * @param array<mixed> $config
      */
@@ -63,22 +63,10 @@ class SurvosSimpleDatatablesBundle extends AbstractBundle
         ;
     }
 
-    public function prependExtension(ContainerConfigurator $container, ContainerBuilder $builder): void
+    public function getPaths(): array
     {
-        if (!$this->isAssetMapperAvailable($builder)) {
-            return;
-        }
-
-        $dir = realpath(__DIR__.'/../assets/');
-        assert(file_exists($dir), $dir);
-
-        $builder->prependExtensionConfig('framework', [
-            'asset_mapper' => [
-                'paths' => [
-                    $dir => '@survos/simple-datatables',
-                ],
-            ],
-        ]);
+        $dir = realpath(__DIR__ . '/../assets/');
+        assert(file_exists($dir), 'asset path must exist for the assets in ' . __DIR__);
+        return [$dir => '@survos/simple-datatables'];
     }
-
 }
