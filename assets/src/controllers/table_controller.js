@@ -29,10 +29,16 @@ export default class extends Controller {
                         if (!data || !data.length) {
                             return
                         }
+                        // or passed in, even better
+                        const headings = Object.keys(data[0]);
+                        // const values = data.map(item => Object.values(item));
+
+                        console.error(Object.keys(data[0]), data);
                         const dataTable = new DataTable(this.element, {
                             data: {
-                                headings: Object.keys(data[0]),
-                                data: data.map(item => Object.values(item))
+                                headings: headings,
+                                data: data, // [values[0]],
+                                // data: [], // data.map(item => Object.values(item))
                             }
                         })
                     })

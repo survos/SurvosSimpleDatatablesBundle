@@ -14,7 +14,27 @@
                         {% endwith %}
                     {% else %}
                         {# handle bools #}
-                        {{ attribute(data, c.name)|default() }}
+                        {% set value = attribute(data, c.name)|default() %}
+                        {% if is_list(value) %}
+                            {# idea: find the longest item to decide if it can be inlined #}
+                            <ul>
+                                {% for v in value %}
+                                    {# @todo: make recursive #}
+                                    <li>{{ is_scalar(v) ? v : v|json_encode }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% elseif is_array(value) %}
+                            {{ value|json_encode }}
+                        {% else %}
+
+                            {#                                {{ is_object(value) ? value|json_encode : value }} #}
+                            {% if is_object(value) %}
+                                <pre>{{ value|json_encode(constant('JSON_UNESCAPED_SLASHES') + constant('JSON_PRETTY_PRINT')) }}</pre>
+                            {% else %}
+                                {{ value|urlize }}
+                            {% endif %}
+
+                        {% endif %}
                     {% endif %}
                 </dd>
             {% endfor %}
