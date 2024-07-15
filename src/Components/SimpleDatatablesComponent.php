@@ -55,6 +55,7 @@ class SimpleDatatablesComponent
             'columns' => [],
         ]);
         $parameters = $resolver->resolve($parameters);
+//        dd($parameters);
         return $parameters;
     }
 
