@@ -37,6 +37,9 @@ class ItemGridComponent
         $parameters = $resolver->resolve($parameters);
         $data = $parameters['data'];
         $exclude = $parameters['exclude'];
+        if (is_object($data)) {
+            $data = (array)$data;
+        }
         if (count($parameters['columns']) === 0) {
             if (is_array($data)) {
                 if (is_string($exclude)) {
