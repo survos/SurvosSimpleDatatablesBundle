@@ -1,6 +1,5 @@
-{# templates/components/datatable.html.twig #}
+{# templates/components/grid.html.twig #}
 {% if remoteUrl %}
-    {{ remoteUrl }}
 <table {{ this.tableId ? 'id="%s"'|format(this.tableId)|raw }}
 
         {{ this.stimulusController ? stimulus_controller(this.stimulusController, {
@@ -10,6 +9,7 @@
             scrollY: this.scrollY,
             data: [],
             remoteUrl: this.remoteUrl,
+            columns: this.columns,
         }) }}
         class="table table table-striped responsivexx {{ this.tableClasses }}"
         {{ this.stimulusController ? stimulus_target(this.stimulusController, 'table') }}>
@@ -27,6 +27,7 @@
                     perPage: this.perPage,
                     scrollY: this.scrollY,
                     remoteUrl: this.remoteUrl,
+                    columns: this.columns,
                     dom: this.dom,
                     info: this.info,
                 }) }}

@@ -1,6 +1,8 @@
 import {Controller} from "@hotwired/stimulus";
 import {DataTable} from "simple-datatables"
 
+// idea: use https://levelup.gitconnected.com/how-to-transfer-large-json-files-efficiently-08c4b83ee058 to read large JSON files
+
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
     static targets = ['table', 'tr'];
@@ -8,6 +10,7 @@ export default class extends Controller {
         search: true,
         fixedHeight: false,
         perPage: 10,
+        columns: {type: String, default: '[]'},
         filter: {type: String, default: ''},
         remoteUrl: {type: String, default: ''}
     }
@@ -30,10 +33,16 @@ export default class extends Controller {
                             return
                         }
                         // or passed in, even better
-                        const headings = Object.keys(data[0]);
+                        let headings = JSON.parse(this.columnsValue);
+                        if (headings.length === 0) {
+                            headings = Object.keys(data[0]);
+                        }
+
+                        // headings = JSON.parse('["quell_id","marking"]');
+
                         // const values = data.map(item => Object.values(item));
 
-                        console.error(Object.keys(data[0]), data);
+                        console.error(headings, data[0]);
                         const dataTable = new DataTable(this.element, {
                             data: {
                                 headings: headings,
