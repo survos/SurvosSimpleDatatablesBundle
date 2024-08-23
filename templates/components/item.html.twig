@@ -31,7 +31,17 @@
                             {% if is_object(value) %}
                                 <pre>{{ value|json_encode(constant('JSON_UNESCAPED_SLASHES') + constant('JSON_PRETTY_PRINT')) }}</pre>
                             {% else %}
-                                {{ value|urlize }}
+                                {% if value starts with "http" %}
+                                    <a href="{{ value }}">
+                                        {% if value ends with 'jpg' %}
+                                            <img src="{{ value }}" class="img-thumbnail"/>
+                                        {% else %}
+                                            {{ value }}
+                                        {% endif %}
+                                    </a>
+                                {% else %}
+                                    {{ value|urlize }}
+                            {% endif %}
                             {% endif %}
 
                         {% endif %}
