@@ -24,8 +24,7 @@ Cut and paste to create an new Symfony project with a dynamic, searchable datata
 symfony new simple-datatables-demo --webapp  && cd simple-datatables-demo
 rm .git -rf
 composer config extra.symfony.allow-contrib true
-composer req survos/simple-datatables-bundle survos/bootstrap-bundle
-echo "import 'bootstrap/dist/css/bootstrap.min.css'" >> assets/app.js
+composer req survos/simple-datatables-bundle 
 
 bin/console make:controller Simple -i
 cat > templates/simple.html.twig <<END
