@@ -21,7 +21,7 @@
         "symfony/http-kernel": "^7.0 || ^6.4",
         "symfony/options-resolver": "^7.0 || ^6.4",
         "symfony/ux-twig-component": "^2.9",
-        "survos/core-bundle": "^1.5.314",
+        "survos/core-bundle": "^1.5.315",
         "twig/twig": "^3.4",
         "symfony/stimulus-bundle": "^2.9"
     },
