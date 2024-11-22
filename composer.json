@@ -32,7 +32,8 @@
         "symfony/framework-bundle": "^6.4 || ^7.0",
         "symfony/phpunit-bridge": "^6.4 || ^7.0",
         "symfony/twig-bundle": "^6.4 || ^7.0",
-        "symfony/var-dumper": "^6.4 || ^7.0"
+        "symfony/var-dumper": "^6.4 || ^7.0",
+        "phpunit/phpunit": "^11.4"
     },
     "suggest": {
         "monolog/monolog": "Allows more advanced logging of the application flow"
