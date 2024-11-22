@@ -40,7 +40,11 @@ class SimpleDatatablesBundleTest extends TestCase
                 ]
             ]
         ]);
-        assertEquals(2, $component->normalizedColumns());
+        $component->columns = $parameters['columns'];
+        assertEquals([
+            'name' => new Column('name'),
+            'age' => new Column('age'),
+        ], $component->normalizedColumns());
 
     }
 
