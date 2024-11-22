@@ -2,7 +2,7 @@
 
 namespace Survos\SimpleDatatables\Model;
 
-class Column
+class Column implements \Stringable
 {
     public function __construct(
         public string $name,

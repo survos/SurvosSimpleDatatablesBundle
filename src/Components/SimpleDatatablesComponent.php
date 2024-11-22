@@ -2,20 +2,16 @@
 
 namespace Survos\SimpleDatatables\Components;
 
-use Psr\Log\LoggerInterface;
 use Survos\SimpleDatatables\Model\Column;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
-use Twig\Environment;
 
 #[AsTwigComponent('simple_datatables', template: '@SurvosSimpleDatatables/components/grid.html.twig')]
 class SimpleDatatablesComponent
 {
     public function __construct(
-        private Environment $twig,
-        private LoggerInterface $logger,
-        public ?string $stimulusController,
+        public string $stimulusController,
     )
     {
     }
