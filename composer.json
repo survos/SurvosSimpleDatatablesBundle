@@ -15,7 +15,7 @@
     "type": "symfony-bundle",
     "require": {
         "php": "^8.3",
-        "survos/core-bundle": "^1.5.401",
+        "survos/core-bundle": "^1.5.402",
         "symfony/config": "^6.4 || ^7.1",
         "symfony/dependency-injection": "^6.4 || ^7.1",
         "symfony/http-kernel": "^6.4 || ^7.1",
