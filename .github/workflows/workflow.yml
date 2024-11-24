@@ -1,4 +1,4 @@
-name: seo-bundle
+name: install-and-phpunit
 
 on:
   [push, pull_request]
