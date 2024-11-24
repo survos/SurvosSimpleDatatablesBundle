@@ -5,13 +5,36 @@ namespace SimpleDatatablesBundle\Tests;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Survos\SimpleDatatables\Components\ItemGridComponent;
+use Survos\SimpleDatatables\Components\SimpleDatatablesComponent;
 use Survos\SimpleDatatables\Model\Column;
 use function PHPUnit\Framework\assertEquals;
 
 class SimpleDatatablesBundleTest extends TestCase
 {
     #[Test]
-    public function testComponent(): void
+    public function gridComponent(): void
+    {
+        $component = new SimpleDatatablesComponent('@survos_simple_datatables_bundle/simple_datatables.html.twig');
+        // get from fixture
+        $parameters = $component->preMount([
+            'data' => [
+                ['name' => 'bob', 'age' => 22]
+            ]
+        ]);
+
+        $component->columns = $parameters['columns'];
+//        assertEquals([
+//            'name' => new Column('name'),
+//            'age' => new Column('age'),
+//        ], $component->normalizedColumns());
+
+        $this->assertNotNull($component->columns);
+
+
+    }
+
+        #[Test]
+    public function itemComponent(): void
     {
         $component = new ItemGridComponent();
         assertEquals([], $component->normalizedColumns());

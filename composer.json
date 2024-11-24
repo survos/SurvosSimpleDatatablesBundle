@@ -1,44 +1,40 @@
 {
     "name": "survos/simple-datatables-bundle",
     "description": "incorporate simple datatables, using twig and stimulus",
-    "license": "MIT",
-    "type": "symfony-bundle",
     "keywords": [
         "symfony-ux",
         "symfony6"
     ],
+    "license": "MIT",
     "authors": [
         {
             "name": "Tac Tacelosky",
             "email": "tacman@gmail.com"
         }
     ],
+    "type": "symfony-bundle",
     "require": {
-        "php": "^8.2",
-        "survos/core-bundle": "^1.5.395",
-        "symfony/config": "^6.4 || ^7.0",
-        "symfony/dependency-injection": "^6.4 || ^7.0",
-        "symfony/http-kernel": "^6.4 || ^7.0",
-        "symfony/options-resolver": "^6.4 || ^7.0",
-        "symfony/stimulus-bundle": "^2.9",
-        "symfony/ux-twig-component": "^2.9",
+        "php": "^8.3",
+        "survos/core-bundle": "^1.5",
+        "symfony/config": "^6.4 || ^7.1",
+        "symfony/dependency-injection": "^6.4 || ^7.1",
+        "symfony/http-kernel": "^6.4 || ^7.1",
+        "symfony/options-resolver": "^6.4 || ^7.1",
+        "symfony/stimulus-bundle": "^2.21",
+        "symfony/ux-twig-component": "^2.8",
         "twig/twig": "^3.4"
     },
     "require-dev": {
         "phpstan/phpstan": "^2.0",
         "rector/rector": "dev-main",
         "roave/security-advisories": "dev-latest",
-        "symfony/browser-kit": "^6.4 || ^7.0",
-        "symfony/framework-bundle": "^6.4 || ^7.0",
-        "symfony/phpunit-bridge": "^6.4 || ^7.0",
-        "symfony/twig-bundle": "^6.4 || ^7.0",
-        "symfony/var-dumper": "^6.4 || ^7.0",
+        "symfony/browser-kit": "^6.4 || ^7.1",
+        "symfony/framework-bundle": "^6.4 || ^7.1",
+        "symfony/phpunit-bridge": "^6.4 || ^7.1",
+        "symfony/twig-bundle": "^6.4 || ^7.1",
+        "symfony/var-dumper": "^6.4 || ^7.1",
         "phpunit/phpunit": "^11.4"
     },
-    "suggest": {
-        "monolog/monolog": "Allows more advanced logging of the application flow"
-    },
-    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Survos\\SimpleDatatables\\": "src/"
@@ -51,5 +47,9 @@
     },
     "scripts": {
         "phpstan": "vendor/bin/phpstan"
-    }
+    },
+    "suggest": {
+        "monolog/monolog": "Allows more advanced logging of the application flow"
+    },
+    "prefer-stable": true
 }

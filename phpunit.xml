@@ -6,6 +6,7 @@
          executionOrder="depends,defects"
          shortenArraysForExportThreshold="10"
          displayDetailsOnPhpunitDeprecations="true"
+         colors="true"
          failOnPhpunitDeprecation="true"
          failOnRisky="true"
          failOnWarning="true">
