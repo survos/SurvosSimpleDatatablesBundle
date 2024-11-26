@@ -37,8 +37,6 @@ class SurvosSimpleDatatablesBundle extends AbstractBundle
         $builder->register(SimpleDatatablesComponent::class)
             ->setAutowired(true)
             ->setAutoconfigured(true)
-            ->setArgument('$twig', new Reference('twig'))
-            ->setArgument('$logger', new Reference('logger'))
             ->setArgument('$stimulusController', $config['stimulus_controller'])
 //            ->setArgument('$registry', new Reference('doctrine')) // should be optional
         ;
