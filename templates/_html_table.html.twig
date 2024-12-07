@@ -21,7 +21,8 @@
         </tr>
         </thead>
         <tbody>
-        {% for row in data %}
+        {{ dump(data) }}
+        {% for idx, row in data %}
             <tr>
                 {% for c in columns %}
                 {% set blockName = c is iterable ? c.blockName|default(false) : c %}
@@ -30,7 +31,8 @@
 
 
     {% if block(blockName) is defined %}
-        {% with {row: row} %}
+        {% with {row: row, idx: idx} %}
+            {{ dump(blockName, row, idx) }}
                 {{ block(blockName) }}
         {% endwith %}
         {% else %}

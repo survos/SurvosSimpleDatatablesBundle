@@ -46,7 +46,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for row in data %}
+            {% for idx, row in data %}
                 <tr class="align-top">
                     {% for c in columns %}
                     <td>
@@ -58,7 +58,7 @@
                         {% set templateName = c.twigTemplate|default(c.name) %}
 
                         {% if block(templateName) is defined %}
-                            {% with {field_name: c.name, row: row, column: c, c:c } %}
+                            {% with {field_name: c.name, row: row, idx: idx, column: c, c:c } %}
                                 {{ block(templateName) }}
                             {% endwith %}
                         {% else %}
