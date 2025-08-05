@@ -26,11 +26,14 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - '8.3'
           - '8.4'
         symfony-version:
-          - '6.4.*'
-          - '7.1.*'
+          - '7.3.*'
+#        include:
+#          - php-version: '8.3'
+#            symfony-version: '6.4.*'
+#          - php-version: '8.3'
+#            symfony-version: '7.1.*'
 
     steps:
       - name: Checkout code
